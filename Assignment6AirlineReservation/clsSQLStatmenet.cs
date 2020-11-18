@@ -70,13 +70,17 @@ namespace Assignment6AirlineReservation
         {
             return "INSERT INTO PASSENGER(First_Name, Last_Name) VALUES('"+ firstName +"','" + lastName + "')";
         }
-        
 
-
-        //todo
         //Insert into the link table
-        //sSQL = "INSERT INTO Flight_Passenger_Link(Flight_ID, Passenger_ID, Seat_Number) " + 
+        //need to figure out how this will work first
+        //public string insertIntoLinkTable(string sFlighID, int iPassengerID, int iSeatNumber)
+        //{
+        //    return "INSERT INTO Flight_Passenger_Link("+ sFlighID +", "+ iPassengerID+", "+ iSeatNumber+") " +
         //       "VALUES( 1 , 6 , 3)";
+        //}
+
+
+
 
 
         ////Deleting the link

@@ -20,6 +20,8 @@ namespace Assignment6AirlineReservation
     /// </summary>
     public partial class wndAddPassenger : Window
     {
+
+
         /// <summary>
         /// constructor for the add passenger window
         /// </summary>

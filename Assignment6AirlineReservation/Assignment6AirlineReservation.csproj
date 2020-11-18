@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="clsFlightsObject.cs" />
+    <Compile Include="clsPassangerObject.cs" />
     <Compile Include="clsSQLStatmenet.cs" />
     <Compile Include="clsUILogic.cs" />
     <Compile Include="wndAddPassenger.xaml.cs">

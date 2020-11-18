@@ -34,11 +34,9 @@ namespace Assignment6AirlineReservation
 
                 UILogic = new clsUILogic();
 
-                //returned a list of Flight objects that was then bound to the combo box
-                //Also should show the flight number and aircraft type together
+                List<clsFlightsObject> flights = UILogic.listOfFlightMethod();
 
-                cbChooseFlight.ItemsSource = UILogic.listOfFlightMethod();
-
+                cbChooseFlight.ItemsSource = flights;
             }
             catch (Exception ex)
             {
@@ -51,13 +49,10 @@ namespace Assignment6AirlineReservation
         {
             try
             {
-                string selection = cbChooseFlight.SelectedItem.ToString();
                 cbChoosePassenger.IsEnabled = true;
                 gPassengerCommands.IsEnabled = true;
-                DataSet ds = new DataSet();                
-                int iRet = 0;
 
-                if (selection == "1")
+                if (cbChooseFlight.SelectedIndex == 1)
                 {
                     CanvasA380.Visibility = Visibility.Hidden;
                     Canvas767.Visibility = Visibility.Visible;
@@ -68,21 +63,8 @@ namespace Assignment6AirlineReservation
                     CanvasA380.Visibility = Visibility.Visible;
                 }
 
-                //I think this should be in a new class to hold SQL statments
-                string sSQL = "SELECT Passenger.Passenger_ID, First_Name, Last_Name, FPL.Seat_Number " +
-                              "FROM Passenger, Flight_Passenger_Link FPL " +
-                              "WHERE Passenger.Passenger_ID = FPL.Passenger_ID AND " +
-                              "Flight_ID = " + cbChooseFlight.SelectedItem.ToString();//If the cbChooseFlight was bound to a list of Flights, the selected object would have the flight ID
-                //Probably put in a new class
-                //ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+                cbChoosePassenger.ItemsSource = UILogic.passengerPull(cbChooseFlight);
 
-                cbChoosePassenger.Items.Clear();
-
-                //Would be nice if code from another class executed the SQL above, added each passenger into a Passenger object, then into a list of Passengers to be returned and bound to the combo box
-                for (int i = 0; i < iRet; i++)
-                {
-                    cbChoosePassenger.Items.Add(ds.Tables[0].Rows[i][1] + " " + ds.Tables[0].Rows[i][2]);
-                }
             }
             catch (Exception ex)
             {

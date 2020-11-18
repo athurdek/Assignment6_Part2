@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Assignment6AirlineReservation
 {
@@ -36,9 +37,13 @@ namespace Assignment6AirlineReservation
 
         List<clsFlightsObject> listOfFlights;
 
+        List<clsPassangerObject> listofPassengers;
+
         clsSQLStatmenet sqlStatements;
 
         clsFlightsObject flight;
+
+        clsPassangerObject passanger;
 
         public clsUILogic()
         {
@@ -76,6 +81,28 @@ namespace Assignment6AirlineReservation
             return listOfFlights;
         }
 
+        public List<clsPassangerObject> passengerPull(ComboBox cbChooseFlight)
+        {
+            clsFlightsObject flightSeletedFlight = (clsFlightsObject)cbChooseFlight.SelectedItem;
+
+            listofPassengers = new List<clsPassangerObject>();
+
+            clsData = new clsDataAccess();
+            int iRet = 0;
+
+           
+            string sSQL = sqlStatements.getPassengerforFlight(flightSeletedFlight.flightID);
+
+            ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+
+            for (int i = 0; i < iRet; i++)
+            {
+                passanger = new clsPassangerObject((int)ds.Tables[0].Rows[i][0], (string)ds.Tables[0].Rows[i][1], (string)ds.Tables[0].Rows[i][2]);
+                listofPassengers.Add(passanger);
+            }
+
+            return listofPassengers;
+        }
 
 
 
