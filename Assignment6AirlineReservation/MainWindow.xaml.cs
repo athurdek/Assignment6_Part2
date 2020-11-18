@@ -22,8 +22,8 @@ namespace Assignment6AirlineReservation
     /// </summary>
     public partial class MainWindow : Window
     {
-        clsDataAccess clsData;
         wndAddPassenger wndAddPass;
+        clsUILogic UILogic;
 
         public MainWindow()
         {
@@ -32,22 +32,13 @@ namespace Assignment6AirlineReservation
                 InitializeComponent();
                 Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
-               
+                UILogic = new clsUILogic();
 
-                ////Should probably not have SQL statements behind the UI
-                //string sSQL = "SELECT Flight_ID, Flight_Number, Aircraft_Type FROM FLIGHT";
-                //int iRet = 0;
-                //clsData = new clsDataAccess();
+                //returned a list of Flight objects that was then bound to the combo box
+                //Also should show the flight number and aircraft type together
 
-                ////This should probably be in a new class.  Would be nice if this new class
-                ////returned a list of Flight objects that was then bound to the combo box
-                ////Also should show the flight number and aircraft type together
-                //ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+                cbChooseFlight.ItemsSource = UILogic.listOfFlightMethod();
 
-                for(int i = 0; i < iRet; i++)
-                {
-                    cbChooseFlight.Items.Add(ds.Tables[0].Rows[i][0]);
-                }
             }
             catch (Exception ex)
             {
@@ -83,7 +74,7 @@ namespace Assignment6AirlineReservation
                               "WHERE Passenger.Passenger_ID = FPL.Passenger_ID AND " +
                               "Flight_ID = " + cbChooseFlight.SelectedItem.ToString();//If the cbChooseFlight was bound to a list of Flights, the selected object would have the flight ID
                 //Probably put in a new class
-                ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+                //ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
 
                 cbChoosePassenger.Items.Clear();
 

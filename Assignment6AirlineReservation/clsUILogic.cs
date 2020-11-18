@@ -32,30 +32,48 @@ namespace Assignment6AirlineReservation
         int iNumRetValues = 0;
 
 
+        clsDataAccess clsData;
+
+        List<clsFlightsObject> listOfFlights;
+
+        clsSQLStatmenet sqlStatements;
+
+        clsFlightsObject flight;
+
         public clsUILogic()
         {
             try
-            {
-                db = new clsDataAccess();
+            { 
+                sqlStatements = new clsSQLStatmenet();
 
-
-
-
-                //Should probably not have SQL statements behind the UI
-                string sSQL = "SELECT Flight_ID, Flight_Number, Aircraft_Type FROM FLIGHT";
-                int iRet = 0;
-                clsData = new clsDataAccess();
-
-                //This should probably be in a new class.  Would be nice if this new class
-                //returned a list of Flight objects that was then bound to the combo box
-                //Also should show the flight number and aircraft type together
-                ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+                listOfFlightMethod();
             }
             catch (Exception ex)
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                              MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
+        }
+
+        public List<clsFlightsObject> listOfFlightMethod()
+        {
+            listOfFlights = new List<clsFlightsObject>();
+
+            string sSQL = sqlStatements.returnFlightInfo();
+            int iRet = 0;
+            clsData = new clsDataAccess();
+
+            //This should probably be in a new class.  Would be nice if this new class
+            //returned a list of Flight objects that was then bound to the combo box
+            //Also should show the flight number and aircraft type together
+            ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+
+            for (int i = 0; i < iRet; i++)
+            {
+                flight = new clsFlightsObject((int)ds.Tables[0].Rows[i][0], (string)ds.Tables[0].Rows[i][1], (string)ds.Tables[0].Rows[i][2]);
+                listOfFlights.Add(flight);
+            }
+            return listOfFlights;
         }
 
 
