@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment6AirlineReservation
 {
-    class clsFlightsObject
+    public class clsFlightsObject
     {
         public int flightID { get; set; }
 

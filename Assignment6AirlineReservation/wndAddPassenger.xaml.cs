@@ -20,17 +20,17 @@ namespace Assignment6AirlineReservation
     /// </summary>
     public partial class wndAddPassenger : Window
     {
-        clsUILogic uILogic;
+        public clsUILogic uILogic { get; }
 
         /// <summary>
         /// constructor for the add passenger window
         /// </summary>
-        public wndAddPassenger()
+        public wndAddPassenger(clsUILogic uILogic)
         {
             try
             {
                 InitializeComponent();
-                uILogic = new clsUILogic();
+                this.uILogic = uILogic;
             }
             catch (Exception ex)
             {

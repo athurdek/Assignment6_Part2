@@ -64,7 +64,7 @@
         <Canvas x:Name="Canvas767" Grid.RowSpan="3" Visibility="Visible">
             <Label x:Name="Flight_Title" Content="767" Canvas.Left="125" Canvas.Top="29" FontSize="16" FontWeight="Bold" />
             <Canvas x:Name="c767_Seats" Grid.RowSpan="3" Visibility="Visible">
-                <Label x:Name="Seat1" Content="1" Background="Blue" Height="50" Width="50" Canvas.Left="30" Canvas.Top="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="25"/>
+                <Label x:Name="Seat1" Content="1" Background="Blue" Height="50" Width="50" Canvas.Left="30" Canvas.Top="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="25" MouseDown="seatClick"/>
                 <Label x:Name="Seat2" Content="2" Background="Blue" Height="50" Width="50" Canvas.Left="85" Canvas.Top="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="25"/>
                 <Label x:Name="Seat3" Content="3" Background="Blue" Height="50" Width="50" Canvas.Left="142" Canvas.Top="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="25"/>
                 <Label x:Name="Seat4" Content="4" Background="Blue" Height="50" Width="50" Canvas.Left="197" Canvas.Top="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="25"/>

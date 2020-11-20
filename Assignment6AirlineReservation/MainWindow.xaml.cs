@@ -37,12 +37,19 @@ namespace Assignment6AirlineReservation
                 List<clsFlightsObject> flights = UILogic.listOfFlightMethod();
 
                 cbChooseFlight.ItemsSource = flights;
+                colorSeats();
             }
             catch (Exception ex)
             {
                 HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
+        }
+
+        //TODO
+        private void colorSeats()
+        {
+            throw new NotImplementedException();
         }
 
         private void cbChooseFlight_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,8 +84,18 @@ namespace Assignment6AirlineReservation
         {
             try
             {
-                wndAddPass = new wndAddPassenger();
+                wndAddPass = new wndAddPassenger(UILogic);
                 wndAddPass.ShowDialog();
+                UILogic = wndAddPass.uILogic;
+                if (UILogic.bNewPassangerAdded)
+                {
+                    cbChooseFlight.IsEnabled = false;
+                    cbChoosePassenger.IsEnabled = false;
+                    cmdAddPassenger.IsEnabled = false;
+                    cmdChangeSeat.IsEnabled = false;
+                    cmdDeletePassenger.IsEnabled = false;
+                }
+
             }
             catch (Exception ex)
             {
@@ -97,6 +114,32 @@ namespace Assignment6AirlineReservation
             {
                 System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
             }
+        }
+
+        private void seatClick(object sender, MouseButtonEventArgs e)
+        {
+            Label holdLabel = (Label)sender;
+            
+            //todo make background the check to see if a passenger should be added
+            //if (holdLabel = red)
+            //{
+
+            //}
+
+            clsFlightsObject holdFlightObject = (clsFlightsObject)cbChooseFlight.SelectedItem;
+
+
+            
+
+            UILogic.insertIntoLinkTable(holdFlightObject.flightID.ToString(), Convert.ToInt32(holdLabel.Content));
+
+            cbChoosePassenger.ItemsSource = UILogic.passengerPull(cbChooseFlight);
+
+            cbChooseFlight.IsEnabled = true;
+            cbChoosePassenger.IsEnabled = true;
+            cmdAddPassenger.IsEnabled = true;
+            cmdChangeSeat.IsEnabled = true;
+            cmdDeletePassenger.IsEnabled = true;
         }
     }
 }

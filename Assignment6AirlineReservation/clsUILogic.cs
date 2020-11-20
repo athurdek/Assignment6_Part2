@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace Assignment6AirlineReservation
 {
-    class clsUILogic
+    public class clsUILogic
     {
         /// <summary>
         /// Creates the dataset object
@@ -31,6 +31,12 @@ namespace Assignment6AirlineReservation
         /// set the num of return values
         /// </summary>
         int iNumRetValues = 0;
+
+        public bool bNewPassangerAdded = false;
+
+        string sPassgenerFirstName;
+
+        string sPassgenerLastName;
 
 
         clsDataAccess clsData;
@@ -107,10 +113,45 @@ namespace Assignment6AirlineReservation
         public void insertPassangerIntoDB(string firstName, string lastName)
         {
             sSQL = sqlStatements.insertAPassenger(firstName, lastName);
-            
+            this.sPassgenerFirstName = firstName;
+            this.sPassgenerLastName = lastName;
+
             clsData = new clsDataAccess();
             int iRet = 0;
             iRet = clsData.ExecuteNonQuery(sSQL);
+
+            bNewPassangerAdded = true;
+        }
+
+
+        public void insertIntoLinkTable(string sFlighID, int iSeatNumber)
+        {
+
+            int iPassengerID = getPassengerID();
+
+            clsData = new clsDataAccess();
+            sSQL = sqlStatements.insertIntoLinkTable(sFlighID, iPassengerID, iSeatNumber);
+
+            int iRet = 0;
+            iRet = clsData.ExecuteNonQuery(sSQL);
+
+            bNewPassangerAdded = false;
+        }
+
+        public int getPassengerID()
+        {
+            clsData = new clsDataAccess();
+            int iRet = 0;
+            sSQL = sqlStatements.queryOutPassengerID(sPassgenerFirstName, sPassgenerLastName);
+            ds = clsData.ExecuteSQLStatement(sSQL,ref iRet);
+
+            return (int)ds.Tables[0].Rows[0][0];
+        }
+
+        //todo
+        public void checkIfSeatsTaken(string sFlighID, int iSeatNumber)
+        {
+
         }
 
 

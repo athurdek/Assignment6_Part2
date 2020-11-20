@@ -72,14 +72,16 @@ namespace Assignment6AirlineReservation
         }
 
         //Insert into the link table
-        //need to figure out how this will work first
-        //public string insertIntoLinkTable(string sFlighID, int iPassengerID, int iSeatNumber)
-        //{
-        //    return "INSERT INTO Flight_Passenger_Link("+ sFlighID +", "+ iPassengerID+", "+ iSeatNumber+") " +
-        //       "VALUES( 1 , 6 , 3)";
-        //}
+        public string insertIntoLinkTable(string sFlighID, int iPassengerID, int iSeatNumber)
+        {
+            return "INSERT INTO Flight_Passenger_Link(Flight_ID, Passenger_ID, Seat_Number) "+
+               "VALUES(" + sFlighID + " , "+ iPassengerID + " , "+ iSeatNumber + ")";
+        }
 
-
+        public string queryOutPassengerID(string firstName, string lastName)
+        {
+            return "SELECT Passenger_ID from Passenger where First_Name = '"+firstName+"' AND Last_Name = '"+lastName+"'";
+        }
 
 
 
@@ -94,14 +96,7 @@ namespace Assignment6AirlineReservation
         //	"WHERE PASSENGER_ID = 6";
 
 
-        ////To Insert a new passenger
-        //   INSERT INTO PASSENGER(First_Name, Last_Name) VALUES('FirstName','LastName');
 
-
-
-        //        //Then you need to query back out the Passenger_ID by executing the statement:
-        //        //Get the passenger's ID
-        //        sSQL = "SELECT Passenger_ID from Passenger where First_Name = 'Shawn' AND Last_Name = 'Cowder'";
 
 
     }
