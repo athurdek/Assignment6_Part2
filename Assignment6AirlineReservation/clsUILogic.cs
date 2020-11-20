@@ -110,7 +110,7 @@ namespace Assignment6AirlineReservation
             
             clsData = new clsDataAccess();
             int iRet = 0;
-            ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+            iRet = clsData.ExecuteNonQuery(sSQL);
         }
 
 

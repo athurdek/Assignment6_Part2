@@ -86,6 +86,7 @@ namespace Assignment6AirlineReservation
         private void cmdSave_Click(object sender, RoutedEventArgs e)
         {
             uILogic.insertPassangerIntoDB(txtFirstName.Text, txtLastName.Text);
+            this.Close();
         }
 
         private void cmdCancel_Click(object sender, RoutedEventArgs e)
