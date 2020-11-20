@@ -20,7 +20,7 @@ namespace Assignment6AirlineReservation
     /// </summary>
     public partial class wndAddPassenger : Window
     {
-
+        clsUILogic uILogic;
 
         /// <summary>
         /// constructor for the add passenger window
@@ -30,6 +30,7 @@ namespace Assignment6AirlineReservation
             try
             {
                 InitializeComponent();
+                uILogic = new clsUILogic();
             }
             catch (Exception ex)
             {
@@ -83,6 +84,11 @@ namespace Assignment6AirlineReservation
         }
 
         private void cmdSave_Click(object sender, RoutedEventArgs e)
+        {
+            uILogic.insertPassangerIntoDB(txtFirstName.Text, txtLastName.Text);
+        }
+
+        private void cmdCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

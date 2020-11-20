@@ -104,6 +104,15 @@ namespace Assignment6AirlineReservation
             return listofPassengers;
         }
 
+        public void insertPassangerIntoDB(string firstName, string lastName)
+        {
+            sSQL = sqlStatements.insertAPassenger(firstName, lastName);
+            
+            clsData = new clsDataAccess();
+            int iRet = 0;
+            ds = clsData.ExecuteSQLStatement(sSQL, ref iRet);
+        }
+
 
 
         /// <summary>
